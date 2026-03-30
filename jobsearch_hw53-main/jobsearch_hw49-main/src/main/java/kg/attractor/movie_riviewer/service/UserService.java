@@ -44,7 +44,6 @@ public class UserService {
             throw new RuntimeException("Email уже занят!");
         }
 
-        // Шифруем пароль перед сохранением
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
 

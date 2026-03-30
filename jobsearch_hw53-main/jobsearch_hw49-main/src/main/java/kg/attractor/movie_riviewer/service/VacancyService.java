@@ -16,7 +16,7 @@ import java.util.List;
 public class VacancyService {
 
     private final VacancyRepository vacancyRepository;
-    private final UserRepository userRepository; // Это нужно добавить!
+    private final UserRepository userRepository;
 
     public List<Vacancy> getAllVacancies() {
         return vacancyRepository.findAll();
@@ -26,12 +26,11 @@ public class VacancyService {
         return vacancyRepository.findByCategory(category);
     }
 
-    // Метод для сохранения вакансии с привязкой к текущему юзеру
     public void saveVacancyWithAuth(Vacancy vacancy, String email) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Пользователь не найден"));
 
-        vacancy.setUserId(user.getId()); // Привязываем вакансию к ID залогиненного юзера
+        vacancy.setUserId(user.getId());
         vacancyRepository.save(vacancy);
         log.info("Вакансия успешно сохранена для пользователя: {}", email);
     }

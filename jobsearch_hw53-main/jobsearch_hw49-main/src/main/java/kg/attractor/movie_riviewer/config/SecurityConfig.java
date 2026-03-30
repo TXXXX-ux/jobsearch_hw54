@@ -20,11 +20,9 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        // Позволит нам временно использовать пароли без шифрования
         return org.springframework.security.crypto.factory.PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
-    // ВЫНЕСИ ЭТОТ МЕТОД СЮДА (ОТДЕЛЬНО)
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
@@ -38,10 +36,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // Обязательно для работы консоли
-                .headers(headers -> headers.frameOptions(frame -> frame.disable())) // РАЗРЕШАЕТ ИНТЕРФЕЙС H2
+                .csrf(csrf -> csrf.disable())
+                .headers(headers -> headers.frameOptions(frame -> frame.disable()))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/h2-console/**").permitAll() // оступ без логина Spring
+                        .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                         .requestMatchers("/", "/index.html", "/static/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/vacancies").permitAll()

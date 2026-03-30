@@ -40,13 +40,12 @@ public class FileController {
         byte[] data = Files.readAllBytes(path);
         Resource resource = new ByteArrayResource(data);
 
-        // Определяем тип контента (jpg или png)
         MediaType mediaType = name.toLowerCase().endsWith(".png") ?
                 MediaType.IMAGE_PNG : MediaType.IMAGE_JPEG;
 
         return ResponseEntity.ok()
                 .contentType(mediaType)
-                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + name + "\"") // ЗАМЕНИЛИ attachment НА inline
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + name + "\"")
                 .body(resource);
     }
 }

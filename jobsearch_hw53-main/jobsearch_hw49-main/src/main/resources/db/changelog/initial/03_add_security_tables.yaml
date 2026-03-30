@@ -2,7 +2,7 @@ databaseChangeLog:
   - changeSet:
       id: 03-add-security-tables
       author: tyler
-      changes: # <-- Убедитесь, что здесь список изменений
+      changes:
         - createTable:
             tableName: authorities
             columns:

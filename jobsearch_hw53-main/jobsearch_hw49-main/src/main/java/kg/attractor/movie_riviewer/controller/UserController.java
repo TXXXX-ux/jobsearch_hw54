@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/users") // Добавили базовый префикс
+@RequestMapping("/api/users")
 @RequiredArgsConstructor
 public class UserController {
 

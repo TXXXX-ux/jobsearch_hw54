@@ -19,7 +19,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     private final JdbcTemplate jdbcTemplate;
 
-    // CustomUserDetailsService.java
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         log.info("Тайлер, проверяем вход для: {}", email);
@@ -30,7 +29,6 @@ public class CustomUserDetailsService implements UserDetailsService {
                             User.withUsername(rs.getString("email"))
                                     .password(rs.getString("password"))
                                     .authorities("ROLE_USER")
-                                    // УДАЛИЛИ .enabled(true), чтобы проект скомпилировался
                                     .build()
                     , email);
         } catch (Exception e) {

@@ -6,7 +6,6 @@ import kg.attractor.movie_riviewer.service.VacancyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-// УБЕДИСЬ, ЧТО ИМПОРТ ТАКОЙ:
 import org.springframework.security.core.Authentication;
 
 import java.util.List;
