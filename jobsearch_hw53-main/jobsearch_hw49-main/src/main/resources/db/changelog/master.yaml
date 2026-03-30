@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/initial/01_create_tables.yaml
+  - include:
+      file: db/changelog/initial/03_add_security_tables.yaml # СНАЧАЛА СТРУКТУРА
+  - include:
+      file: db/changelog/initial/02_insert_test_data.yaml   # ПОТОМ ДАННЫЕ

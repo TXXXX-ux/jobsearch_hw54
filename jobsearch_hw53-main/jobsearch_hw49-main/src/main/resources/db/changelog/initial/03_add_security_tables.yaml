@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: 03-add-security-tables
+      author: tyler
+      changes: # <-- Убедитесь, что здесь список изменений
+        - createTable:
+            tableName: authorities
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: authority
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            constraintName: fk_authorities_user
+            baseTableName: authorities
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id

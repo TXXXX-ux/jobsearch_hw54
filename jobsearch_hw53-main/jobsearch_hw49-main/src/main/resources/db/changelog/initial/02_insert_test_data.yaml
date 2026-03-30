@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - changeSet:
+      id: 02-insert-test-data-FIXED-V4
+      author: tyler
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column: { name: name, value: "Tyler" }
+              - column: { name: surname, value: "Durden" }
+              - column: { name: age, value: 30 }
+              - column: { name: email, value: "tyler@fightclub.com" }
+              - column: { name: password, value: "{noop}test123" }
+              - column: { name: phone_number, value: "555-0101" }
+              - column: { name: enabled, value: true }
+              - column: { name: account_type, value: "applicant" }
+
+        - insert:
+            tableName: VACANCIES
+            columns:
+              - column: { name: user_id, value: 1 } # ИЗМЕНИЛ С 2 НА 1
+              - column: { name: category, value: "IT" }
+              - column: { name: title, value: "Java Developer" }
+              - column: { name: description, value: "Looking for someone to fix the system" }
+
+        - insert:
+            tableName: resumes
+            columns:
+              - column: { name: user_id, value: 1 }
+              - column: { name: category, value: "Sales" }
+              - column: { name: title, value: "Sales Manager" }
+              - column: { name: info, value: "Expert in soap sales" }
+
+        - insert:
+            tableName: responses
+            columns:
+              - column: { name: vacancy_id, value: 1 }
+              - column: { name: resume_id, value: 1 }

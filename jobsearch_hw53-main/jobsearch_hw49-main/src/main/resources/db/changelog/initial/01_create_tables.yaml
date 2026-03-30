@@ -1,0 +1,72 @@
+databaseChangeLog:
+  - changeSet:
+      id: 01-create-initial-tables
+      author: tyler
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column: { name: id, type: int, autoIncrement: true, constraints: { primaryKey: true, nullable: false } }
+              - column: { name: name, type: varchar(255) }
+              - column: { name: surname, type: varchar(255) }
+              - column: { name: age, type: int }
+              - column: { name: email, type: varchar(255), constraints: { unique: true, nullable: false } }
+              - column: { name: password, type: varchar(255) }
+              - column: { name: phone_number, type: varchar(255) }
+              - column: { name: avatar, type: varchar(255) }
+              - column: { name: account_type, type: varchar(50) }
+              - column: { name: enabled, type: boolean, defaultValue: true }
+
+        - createTable:
+            tableName: VACANCIES
+            columns:
+              - column: { name: id, type: int, autoIncrement: true, constraints: { primaryKey: true, nullable: false } }
+              - column: { name: user_id, type: int }
+              - column: { name: category, type: varchar(255) }
+              - column: { name: title, type: varchar(255) }
+              - column: { name: description, type: text }
+              - column: { name: info, type: text }
+
+        - createTable:
+            tableName: resumes
+            columns:
+              - column: { name: id, type: int, autoIncrement: true, constraints: { primaryKey: true, nullable: false } }
+              - column: { name: user_id, type: int }
+              - column: { name: category, type: varchar(255) }
+              - column: { name: title, type: varchar(255) }
+              - column: { name: info, type: text }
+
+        - createTable:
+            tableName: responses
+            columns:
+              - column: { name: id, type: int, autoIncrement: true, constraints: { primaryKey: true, nullable: false } }
+              - column: { name: vacancy_id, type: int }
+              - column: { name: resume_id, type: int }
+
+        - addForeignKeyConstraint:
+            constraintName: fk_vacancies_user
+            baseTableName: vacancies
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            constraintName: fk_resumes_user
+            baseTableName: resumes
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            constraintName: fk_responses_vacancy
+            baseTableName: responses
+            baseColumnNames: vacancy_id
+            referencedTableName: vacancies
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            constraintName: fk_responses_resume
+            baseTableName: responses
+            baseColumnNames: resume_id
+            referencedTableName: resumes
+            referencedColumnNames: id

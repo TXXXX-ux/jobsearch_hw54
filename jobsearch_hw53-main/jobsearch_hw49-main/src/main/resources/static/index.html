@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Uploading Gallery</title>
+    <style>
+        body { font-family: sans-serif; background: #1a1a1a; color: white; text-align: center; padding: 50px; }
+        input { padding: 10px; width: 300px; border-radius: 5px; border: none; }
+        button { padding: 10px 20px; background: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        .result-container { margin-top: 30px; border: 2px dashed #444; padding: 20px; min-height: 200px; }
+        img { max-width: 100%; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+    </style>
+</head>
+<body>
+<h1>Просмотр логотипов</h1>
+<p>Введите полное имя файла из логов IDEA:</p>
+
+<input type="text" id="fileName" placeholder="Например: 1a0a1906...jpg">
+<button onclick="showImage()">Показать картину</button>
+
+<div class="result-container" id="container">
+    <p id="status">Картинка появится здесь...</p>
+</div>
+
+<script>
+    function showImage() {
+        const name = document.getElementById('fileName').value;
+        const container = document.getElementById('container');
+        const status = document.getElementById('status');
+
+        if (!name) {
+            alert("Тайлер, введи имя файла!");
+            return;
+        }
+
+        // Формируем путь к твоему контроллеру
+        const imageUrl = `/api/files/download/${name}`;
+
+        // Просто вставляем тег img в контейнер
+        status.innerText = "Загрузка...";
+        container.innerHTML = `<img src="${imageUrl}" alt="Logo" onerror="handleError()">`;
+    }
+
+    function handleError() {
+        document.getElementById('container').innerHTML = `<p style="color: #e74c3c;">Ошибка: Файл не найден в папке uploads!</p>`;
+    }
+</script>
+</body>
+</html>
